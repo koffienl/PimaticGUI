@@ -4,7 +4,7 @@
     $("#loading").show();
 
 //DEFINE THE CONNECTION
-var socket = io.connect('http://piamtic_ip/?username=admin&password=admin', {
+var socket = io.connect('http://pimatic_ip/?username=admin&password=admin', {
   reconnection: true,
   reconnectionDelay: 1000,
   reconnectionDelayMax: 3000,
