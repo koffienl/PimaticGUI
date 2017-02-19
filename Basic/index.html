@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pimatic UI</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--CSS, QUICKLY PUT TOGETHER, BEAR WITH ME-->
+    <link rel="stylesheet" href="css/Site.css">
+    <link rel="stylesheet" href="css/weather.css">
+    <!--CUSTOM FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<!--JS-->
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!--SweetAlert-->
+	<script src="js/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	<!--Magical sockets-->
+	<script src="js/socket.io.js"></script>
+	<script src="js/pimatic-socket.js"></script>
+</head>
+<body>
+	 <div class="container body-content" id="loading">
+        <div class="frontti">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+            </div>
+        </div>
+		
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<div id="body-message"></div>
+                </div>
+            </div>
+        </div>
+		
+		</div>
+		</div>
+		</div>
+
+
+	 <div class="container body-content" id="gui" style="display: none;">
+        <div class="frontti">
+    <div class="row">
+
+	        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="temps">
+                        <h2 id="WoonkamerTemperature"></h2>
+                        <h4 id="BuitenTemperature"></h4>
+                        <h3><span id="setpoint"></span><span id="mode"></span></h3>
+			<table width=100%>
+				<tr>
+					<td width=33% style="text-align:center;">
+						<span class='fa fa-arrow-up' onclick="ChangeSetpoint('setpoint-plus')"></span>
+					</td>
+					<td width=33% style="text-align:center;">
+						<h4>Change setpoint</h4>
+					</td>
+					<td width=33% style="text-align:center;">
+						<span class='fa fa-arrow-down' onclick="ChangeSetpoint('setpoint-min')"></span>
+					</td>
+				</tr>
+			</table>
+						<button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('pelletkachel-power')" id="pelletkachel-power">Pelletkachel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('eettafel')" id="eettafel">Eettafel</button>
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('erker1')" id="erker1">Erker 1</button>
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('erker2')" id="erker2">Erker 2</button>
+                </div>
+            </div>
+        </div>
+		
+		<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('terrasoverkapping')" id="terrasoverkapping">Terrasoverkapping</button>
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('keuken')" id="keuken">Keuken</button>
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('bijkeuken')" id="bijkeuken">Bijkeuken</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="well well-sm"><b>Anybody home </b><span class="circle" id="anybody-home"></span></div>
+                    <div class="well well-sm"><b>Richard home </b><span class="circle" id="telefoon-richard"></span></div>
+                    <div class="well well-sm"><b>Simone home </b><span class="circle" id="telefoon-simone"></span></div>
+                    <div class="well well-sm"><b>Elise home </b><span class="circle" id="telefoon-elise"></span></div>
+                    
+                </div>
+            </div>
+        </div>
+
+		<div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('zithoek')" id="zithoek">Zithoek</button>
+                    <button class="btn btn-default btn-lg fullwidth uibutton" onclick="toggleDevice('dressoir')" id="dressoir">Dressoir</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="well well-sm"><b>Tuindeur </b><span class="circle" id="tuindeur"></span></div>
+                </div>
+            </div>
+        </div>
+		
+    </div>
+	</div>
+	</div>
+<br>
+<br>
+    
+</body>
+</html>

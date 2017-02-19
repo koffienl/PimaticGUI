@@ -1,0 +1,37 @@
+﻿
+
+
+
+#weather {
+  
+  margin: 0px auto;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#weather h2 {
+  margin: 0 0 8px;
+  color: #000000;
+  font-size: 80px;
+  font-weight: 200;
+  text-align: center;
+}
+
+#weather h4{
+  font-family: "Helvetica",sans-serif;
+} 
+
+#weather ul {
+  margin: 0;
+  padding: 0;
+}
+
+#weather li {
+  background: #fff;
+  background: rgba(255,255,255,0.90);
+  padding: 20px;
+  margin-right:10px;
+  display: inline-block;
+  border-radius: 5px;
+  font-size: 15px!important;
+}
