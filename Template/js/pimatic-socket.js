@@ -1,7 +1,7 @@
 ﻿//Kitsunen's quick and dirty socket.io API connection for own uses.
 
-// Only show the 'loading' screen first
-$("#body-message").html("Connecting to Pimatic API");	
+// Show the 'loading' screen first when we try to connect to Pimatic
+$("#body-message").html("Connecting to Pimatic API");
 $("#loading").show();
 
 //DEFINE THE CONNECTION
@@ -26,7 +26,7 @@ socket.on('disconnect', function(data) {
   console.log('Connection to Pimatic API lost, reconnecting...');
 });
 
-
+// When the connection is established, get all the Pimatic info and 'build' our GUI site
 $( document ).ready(function() {
 	GetStates();
 });
@@ -45,6 +45,7 @@ function GetStates()
 	{
 		console.log(devices);
 		
+		// Loop through all the devices we get from Pimatic
 		$.each( devices, function( key, value )
 		{
 			// Find every switch that's also in the html and set correct button state
@@ -58,24 +59,27 @@ function GetStates()
 			{
 				toggleCircle(devices[key].attributes[0].value, devices[key].id)
 			}
-			
+
 			if (devices[key].id == "id-woonkamer-temperatuur")
 			{				
-				$("#gui").find('#WoonkamerTemperature').html("Woonkamer " + devices[key].attributes[0].value +" °C")
+				$("#gui").find('#LivingRoomTemperature').html("LivingRoomTemperature " + devices[key].attributes[0].value +" °C")
 			}
-			
 			if (devices[key].id == "weer")
 			{
-				$("#gui").find('#BuitenTemperature').html("Lelystad " + devices[key].attributes[0].value +" °C");
+				$("#gui").find('#WeatherTemperature').html("Lelystad " + devices[key].attributes[0].value +" °C");
 			}
 
 			if (devices[key].id == "thermostaat")
 			{
 				$("#gui").find('#setpoint').html("Setpoint " + devices[key].attributes[0].value +" °C");
 				$("#gui").find('#mode').html(" [" + devices[key].attributes[2].value +"]");
-			}
-		});
+			}			
+			
+			});
+
+
 		
+		// Now that we have all the info, and set all the buttons/presence/text we can show the GUI
 		$("#loading").hide();
 		$("#gui").show();
 	});
@@ -88,28 +92,18 @@ function GetStates()
 //***********************************************
 
 socket.on('deviceAttributeChanged', function(attrEvent) {
-  console.log(attrEvent);
-	if($("#gui").find("#" + attrEvent.deviceId).length > 0)
-	{
-		//alert("incoming event bestaat in html: " + attrEvent.deviceId)
-		if ($("#gui").find("#" + attrEvent.deviceId).hasClass("uibutton"))
-		{
-			//alert("toggle button")
-			toggleUI(attrEvent.value, attrEvent.deviceId)
-		}
-		
-		if ($("#gui").find("#" + attrEvent.deviceId).hasClass("circle"))
-		{
-			//alert(attrEvent.value + attrEvent.deviceId)
-			toggleCircle(attrEvent.value, attrEvent.deviceId)
-		}
-	}
-      
+	console.log(attrEvent);
+
    if (attrEvent.deviceId == "id-woonkamer-temperatuur")
    {
-		$("#gui").find('#WoonkamerTemperature').html("Woonkamer " + attrEvent.value +" °C");
+		$("#gui").find('#LivingRoomTemperature').html("LivingRoomTemperature " + attrEvent.value +" °C");
    }
 
+   if (attrEvent.deviceId == "weer")
+   {
+		$("#gui").find('#WeatherTemperature').html("Lelystad " + attrEvent.value +" °C");
+   }
+   
    if (attrEvent.deviceId == "thermostaat" && attrEvent.attributeName == "temperatureSetpoint")
    {
 	   $("#gui").find('#setpoint').html("Setpoint " + attrEvent.value +" °C");
@@ -120,27 +114,21 @@ socket.on('deviceAttributeChanged', function(attrEvent) {
 	   $("#gui").find('#mode').html(" [" + attrEvent.value + "]");
    }
    
-   	if (attrEvent.deviceId == "anybody-home")
+	// Find out if he update we got from Pimatic is also in our HTML
+	if($("#gui").find("#" + attrEvent.deviceId).length > 0)
 	{
-		toggleCircle(attrEvent.value.toString(), "anybodyhome")
+		// If we have this device and our HTML class is 'uibutton' then treat it as a button (ON/OFF) device
+		if ($("#gui").find("#" + attrEvent.deviceId).hasClass("uibutton"))
+		{
+			toggleUI(attrEvent.value, attrEvent.deviceId)
+		}
+		
+		// If we have this device and our HTML class is 'circle' then treat it as a presence (absent/present) device
+		if ($("#gui").find("#" + attrEvent.deviceId).hasClass("circle"))
+		{
+			toggleCircle(attrEvent.value, attrEvent.deviceId)
+		}
 	}
-	
-	if (attrEvent.deviceId == "telefoon-richard")
-	{
-		toggleCircle(attrEvent.value.toString(), "telefoon-richard")
-	}
-
-	if (attrEvent.deviceId == "telefoon-simone")
-	{
-		toggleCircle(attrEvent.value.toString(), "telefoon-simone")
-	}
-	
-	if (attrEvent.deviceId == "telefoon-elise")
-	{
-		toggleCircle(attrEvent.value.toString(), "telefoon-elise")
-	}
-
-
 });
 //***********************************************
 //END OF SOCKET IO RECEIVING PARTS***************
