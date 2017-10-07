@@ -368,6 +368,25 @@ $( document ).ready(function()
 			setpoint = attrEvent.value
 			DrawNestDiff();
 		}
+
+		// Forward every PRESENCE or CONTACT device to the 'toggleContact' function
+		if(attrEvent.attributeName == "dimlevel")
+		{
+			DimlevelUI(attrEvent.value, attrEvent.deviceId, "")
+			AlreadyParsed = 1;
+		}
+		
+		if (attrEvent.attributeName == "state")
+		{
+			toggleUI(attrEvent.value, attrEvent.deviceId)
+			AlreadyParsed = 1;
+		}
+  
+		if (attrEvent.attributeName == "presence" || attrEvent.attributeName == "contact")
+		{
+			toggleContact(attrEvent.value, attrEvent.deviceId)
+			AlreadyParsed = 1;
+		}
 		
 		$.each( pages, function( key, value )
 		{
@@ -413,113 +432,6 @@ $( document ).ready(function()
 				$("#" + pages[key]).find('#' + attrEvent.deviceId).html(val);
 			}
 		})
-
-		/* DONE
-		if (attrEvent.deviceId == "thermostaat" && attrEvent.attributeName == "temperatureSetpoint")
-		{
-			$.each( tabs, function( key2, value2 )
-			{
-				var FindDiv = tabs[key2]["name"]
-				if (tabs[key2]["hasSubPages"] == true)
-				{
-					FindDiv = tabs[key2]["SubPagesConfig"][0]["currentSubPage"]
-				}
-				$("#" + FindDiv).find('#setpoint').html(attrEvent.value)
-			})
-		}
-		*/
-		
-		/* DONE
-		if (attrEvent.deviceId == "id-woonkamer-temperatuur")
-		{				
-			$("#roomtemp").html("room " + attrEvent.value +" °C")
-			current = attrEvent.value
-			DrawNestDiff();
-		}
-		*/
-			
-		// END for nest
-
-		// Forward every PRESENCE or CONTACT device to the 'toggleContact' function
-		if(attrEvent.attributeName == "dimlevel")
-		{
-			DimlevelUI(attrEvent.value, attrEvent.deviceId, "")
-			AlreadyParsed = 1;
-		}
-		
-		if (attrEvent.attributeName == "state")
-		{
-			toggleUI(attrEvent.value, attrEvent.deviceId)
-			AlreadyParsed = 1;
-		}
-  
-		if (attrEvent.attributeName == "presence" || attrEvent.attributeName == "contact")
-		{
-			toggleContact(attrEvent.value, attrEvent.deviceId)
-			AlreadyParsed = 1;
-		}
-
-		/* DONE
-		if (attrEvent.attributeName == "running")
-		{
-			$.each( tabs, function( key2, value2 )
-			{
-				var FindDiv = tabs[key2]["name"]
-				if (tabs[key2]["hasSubPages"] == true)
-				{
-					FindDiv = tabs[key2]["SubPagesConfig"][0]["currentSubPage"]
-				}
-				if (attrEvent.value == true)
-				{
-					$("#" + FindDiv).find('#' + attrEvent.deviceId + '\\.' + 'status').html("<span class='fa fa-play pull-right'></span>");
-				}
-				if (attrEvent.value == false)
-				{
-					$("#" + FindDiv).find('#' + attrEvent.deviceId + '\\.' + 'status').html("<span class='fa fa-stop pull-right'></span>");
-				}
-			})
-			AlreadyParsed = 1;				
-		}
-		*/
-
-		/* DONE
-		if (attrEvent.attributeName == "time")
-		{
-			$.each( tabs, function( key2, value2 )
-			{
-				var FindDiv = tabs[key2]["name"]
-				if (tabs[key2]["hasSubPages"] == true)
-				{
-					FindDiv = tabs[key2]["SubPagesConfig"][0]["currentSubPage"]
-				}
-				$("#" + FindDiv).find('#' + attrEvent.deviceId).html(attrEvent.value.toString().toHHMMSS());
-			})
-			AlreadyParsed = 1;				
-		}
-		*/
-		
-
-
-		/* DONE
-		if (AlreadyParsed == 0)
-		{
-			$.each( tabs, function( key, value)
-			{
-				var FindDiv = tabs[key]["name"]
-				if (tabs[key]["hasSubPages"] == true)
-				{
-					FindDiv = tabs[key]["SubPagesConfig"][0]["currentSubPage"]
-				}
-				var val = attrEvent.value
-				if ($.isNumeric(val) && Math.round(val) !== val)
-				{
-					val = parseFloat(val).toFixed(config["decimals"])
-				}
-				$("#" + FindDiv).find('#' + attrEvent.deviceId + '\\.' + attrEvent.attributeName).html(val);
-				$("#" + FindDiv).find('#' + attrEvent.deviceId).html(val);
-			})
-		}
-		*/
 	});
 	}
 });
