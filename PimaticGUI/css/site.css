@@ -1,0 +1,126 @@
+﻿.navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
+.navbar {min-height:60px !important}
+
+.nav-pills > li > a {
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+	
+html, body {
+    height:100%;
+}
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+    /* background: url('/images/6.jpg') no-repeat center center fixed; */
+    background-size:cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.fullwidth {
+    width:100%;
+}
+
+.uibutton {
+    margin-bottom:10px;
+    height:70px;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: 0;
+}
+.navbar-inverse .navbar-brand {
+    color: #FFFFFF;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+.navbar-inverse {
+    background-color: #222222;
+    border: 0px;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #999999;
+  background-color: transparent;
+}
+
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #333333;
+    background-color: rgba(61, 210, 33, 0.14);
+    border-color: #FFFFFF;
+}
+
+/*canvasdots.js*/
+canvas {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.frontti {
+    z-index:2;
+    position: relative;
+    overflow: hidden;
+}
+
+/*Testipaneelit*/
+.panel {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.46);
+    border: 0px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    opacity: 0.9;
+}
+
+.footerstyle {
+    color: #FFFFFF;
+}
+
+body {
+padding-right:0px !important;
+margin-right:0px !important;
+}
+.modal {
+  overflow-y: auto;
+}
+
+.galleryframe {
+    min-height:400px;
+}
+
+.modal-lg {
+  min-width:900px;
+  max-width: 900px;
+}
