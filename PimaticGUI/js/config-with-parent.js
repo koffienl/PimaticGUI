@@ -29,18 +29,36 @@ var tabs =
 		"hasSubPages": false
 	},
 	{
-		"name": "Child1", 
+		"name": "Parent", 
 		"default": false,
 		"disabled": false,
-		"hasSubPages": false,
-		"bgimage": "images/42.jpg"
-	},
-	{
-		"name": "Child2", 
-		"default": false,
-		"disabled": false,
-		"hasSubPages": false,
-		"bgimage": "images/46.jpg"
+		"hasSubPages": true,
+		"SubPagesConfig":
+		[
+			{
+				"device": "ENTER DEVICE FOR SWITHCING SUBPAGES HERE",
+				"true": "Child2",
+				"false": "Child1",
+				"currentSubPage": ""
+			}
+		],
+		"SubPages":
+		[
+			{
+				"Child1":
+				[
+					{
+						"bgimage": "images/42.jpg"
+					}
+				],
+				"Child2":
+				[
+					{
+						"bgimage": "images/46.jpg",
+					}
+				]
+			}
+		]
 	},
 	{
 		"name": "Nest",
